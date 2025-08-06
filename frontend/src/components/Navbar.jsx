@@ -1,30 +1,34 @@
 import { Leaf, CircleUser, Menu, CircleX } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const Navlinks = [
-    { href: "#", label: "Home" },
-    { href: "camp", label: "Campgrounds" },
-    { href: "#new", label: "New Campgrounds" },
+    { href: "/", label: "Home" },
+    { href: "/campgrounds", label: "Campgrounds" },
+    { href: "#n", label: "New Campground" },
   ];
   return (
     <div className="px-2 lg:px-12 2xl:px-52 p-4 border-b flex justify-between items-center text-white">
       {/* LOGO */}
-      <span className="flex items-center text-3xl text-white font-extrabold font-logo">
+      <Link
+        to="/"
+        className="flex items-center text-3xl text-white font-extrabold font-logo"
+      >
         {<Leaf color="green" size={28} />}CampX
-      </span>
+      </Link>
       {/* Desktop Navbar Links*/}
       <nav className="hidden w-full md:flex justify-center gap-10 text-lg font-medium ">
         {Navlinks.map((link) => (
-          <a
+          <Link
             key={link.href}
+            to={link.href}
             className="hover:text-green-400 cursor-pointer active:scale-95 transition ease-in-out duration-200"
-            href={link.href}
           >
             {link.label}
-          </a>
+          </Link>
         ))}
       </nav>
       {/* SignUp */}
@@ -44,17 +48,18 @@ const Navbar = () => {
       </button>
       {/* MOBILE MENU links */}
       <nav
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
         className={`md:hidden w-full p-6 absolute top-18 left-0 flex flex-col rounded space-y-6 backdrop-blur-2xl text-center text-lg font-medium opacity-0 transition-all duration-200 ease-out scale-95
         ${isMenuOpen ? "opacity-100 scale-100" : "pointer-events-none"}`}
       >
         {Navlinks.map((link) => (
-          <a
+          <Link
             key={link.href}
             className="hover:text-green-400 cursor-pointer"
-            href={link.href}
+            to={link.href}
           >
             {link.label}
-          </a>
+          </Link>
         ))}
         <a
           href="#"

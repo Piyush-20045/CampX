@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   return (
     <div className="">
-      <div className="px-3 md:px-0 h-screen bg-[url(bgImg.jpg)] bg-gray-950 bg-cover bg-center">
+      <div className="px-2 h-screen bg-[url(bgImg.jpg)] bg-gray-950 bg-cover bg-center">
         {/* NAVBAR */}
         <Navbar />
 
