@@ -8,10 +8,10 @@ const Navbar = () => {
   const Navlinks = [
     { href: "/", label: "Home" },
     { href: "/campgrounds", label: "Campgrounds" },
-    { href: "#n", label: "New Campground" },
+    { href: "/create", label: "New Campground" },
   ];
   return (
-    <div className="px-2 lg:px-12 2xl:px-52 p-4 border-b flex justify-between items-center text-white">
+    <div className="px-2 lg:px-12 2xl:px-52 p-4 border-b flex justify-between items-center text-white shadow shadow-blue-200">
       {/* LOGO */}
       <Link
         to="/"
@@ -49,7 +49,7 @@ const Navbar = () => {
       {/* MOBILE MENU links */}
       <nav
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`md:hidden w-full p-6 absolute top-18 left-0 flex flex-col rounded space-y-6 backdrop-blur-2xl text-center text-lg font-medium opacity-0 transition-all duration-200 ease-out scale-95
+        className={`md:hidden w-full p-6 absolute top-18 left-0 shadow-2xl flex flex-col rounded space-y-6 backdrop-blur-2xl text-center text-lg font-medium opacity-0 transition-all duration-200 ease-out scale-95
         ${isMenuOpen ? "opacity-100 scale-100" : "pointer-events-none"}`}
       >
         {Navlinks.map((link) => (
