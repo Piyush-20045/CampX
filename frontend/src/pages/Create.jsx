@@ -17,10 +17,33 @@ const Create = () => {
       [name]: value,
     }));
   };
+  // sending data to backend
+  const createCamp = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/camps`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+      const data = await response.json();
+    } catch (err) {
+      console.error("Error in saving camp", err);
+    }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("New campground details", formData);
+    await createCamp();
+    setFormData({
+      name: "",
+      location: "",
+      price: "",
+      image: "",
+      description: "",
+    });
   };
 
   return (
