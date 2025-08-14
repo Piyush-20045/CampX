@@ -1,27 +1,18 @@
 import Navbar from "../components/Navbar";
-import campsData from "../campsData.json";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCamps } from "../features/camps/campsSlice";
 import { useEffect } from "react";
-import { useState } from "react";
 
 const Campgrounds = () => {
-  const [camps, setCamps] = useState([]);
-  // Fetching campgrounds from campground
-  const fetchCamps = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps`);
-      const data = await response.json();
-      console.log(data);
-      setCamps(data);
-    } catch (err) {
-      console.error("Error in fetching camps", err);
-    }
-  };
+  const dispatch = useDispatch();
+  const { data: camps, status, error } = useSelector((state) => state.camps);
+
   useEffect(() => {
-    fetchCamps();
-  }, []);
-  useEffect(() => {
-    console.log(camps.name);
-  }, [camps]); // logs whenever camps changes
+    dispatch(fetchCamps());
+  }, [dispatch]);
+
+  if (status === "loading") return <p>Loading camps...</p>;
+  if (status === "failed") return <p>Error: {error}</p>;
 
   return (
     <div className="min-h-screen flex flex-col px-2 bg-gray-900">
@@ -36,7 +27,7 @@ const Campgrounds = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {camps.map((camp) => (
             <div
-              key={camp.id}
+              key={camp._id}
               className="bg-gray-200 shadow-md rounded-lg overflow-hidden"
             >
               <img

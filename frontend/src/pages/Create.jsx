@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import { useDispatch } from "react-redux";
+import { createCamp } from "../features/camps/campsSlice";
 
 const Create = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     location: "",
@@ -17,26 +20,10 @@ const Create = () => {
       [name]: value,
     }));
   };
-  // sending data to backend
-  const createCamp = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/camps`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-      const data = await response.json();
-    } catch (err) {
-      console.error("Error in saving camp", err);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createCamp();
+    await dispatch(createCamp(formData));
     setFormData({
       name: "",
       location: "",
@@ -44,6 +31,7 @@ const Create = () => {
       image: "",
       description: "",
     });
+    alert("Campground created");
   };
 
   return (
