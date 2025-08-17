@@ -22,4 +22,12 @@ route.post("/", async (req, res) => {
     }
 })
 
+route.delete("/:id", async (req, res) => {
+    try {
+        await Campground.findByIdAndDelete(req.params.id);
+        res.status(200).json({message: "Camp deleted"});
+    } catch(err) {
+        res.status(500).json({error: "Failed to delete the camp"})
+    }
+})
 module.exports = route;

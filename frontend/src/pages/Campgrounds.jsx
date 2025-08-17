@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCamps } from "../features/camps/campsSlice";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Campgrounds = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,9 @@ const Campgrounds = () => {
     dispatch(fetchCamps());
   }, [dispatch]);
 
-  if (status === "loading") return <p>Loading camps...</p>;
+  if (status === "loading" && camps.length === 0) {
+    return <p>Loading camps...</p>;
+  }
   if (status === "failed") return <p>Error: {error}</p>;
 
   return (
@@ -26,7 +29,8 @@ const Campgrounds = () => {
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {camps.map((camp) => (
-            <div
+            <Link
+              to={`/camp/${camp._id}`}
               key={camp._id}
               className="bg-gray-200 shadow-md rounded-lg overflow-hidden"
             >
@@ -40,7 +44,7 @@ const Campgrounds = () => {
                 <p className="text-gray-600">{camp.location}</p>
                 <p className="text-green-600 font-medium mt-2">{camp.price}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
