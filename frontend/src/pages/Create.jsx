@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useDispatch } from "react-redux";
 import { createCamp } from "../features/camps/campsSlice";
+import { toast } from "react-toastify";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -31,14 +32,14 @@ const Create = () => {
       image: "",
       description: "",
     });
-    alert("Campground created");
+    toast.success("Campground created", { position: "top-center" });
   };
 
   return (
     <div className="min-h-screen flex flex-col px-2 bg-gray-900">
       <Navbar />
 
-      <div className="mx-3 my-12 p-6 max-w-xl sm:mx-auto bg-gray-100 rounded-lg shadow">
+      <div className="mx-1 my-12 py-8 px-5 max-w-xl sm:mx-auto bg-gray-100 rounded-lg shadow">
         <h2 className="text-2xl text-gray-800 font-bold mb-4 text-center">
           Add New Campground
         </h2>

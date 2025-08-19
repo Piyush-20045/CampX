@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { fetchCamps } from "../features/camps/campsSlice";
+import { toast } from "react-toastify";
 
 const SingleCamps = () => {
   const navigate = useNavigate();
@@ -35,22 +36,22 @@ const SingleCamps = () => {
     } catch (err) {
       console.error("Error in deleting:", err);
     }
-    alert("BLog Deleted");
+    toast.success("Campground Deleted", { position: "top-center" });
     navigate("/campgrounds");
   };
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="px-2 py-6 min-h-screen bg-gray-950">
       {/* Back button */}
       <Link
         to="/campgrounds"
-        className="text-blue-600 hover:underline flex items-center mb-6"
+        className="w-fit text-blue-600 hover:underline flex items-center md:ml-48 py-5"
       >
         ⬅ Back to Campgrounds
       </Link>
 
       {/* Camp Card */}
-      <div className="bg-white shadow-lg rounded-2xl overflow-hidden">
+      <div className="bg-white max-w-2xl mx-auto shadow-md shadow-green-300 rounded-2xl overflow-hidden">
         <img
           src={camp.image}
           alt={camp.name}
@@ -67,12 +68,15 @@ const SingleCamps = () => {
               ₹{camp.price}/night
             </span>
             <div>
-              <button className="w-16 bg-green-600 text-white px-3 py-1.5 rounded-md hover:bg-green-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none">
+              <Link
+                to={`/edit/${id}`}
+                className="w-16 bg-green-600 text-white px-4 py-2.5 rounded-md hover:bg-green-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
+              >
                 Edit
-              </button>
+              </Link>
               <button
                 onClick={deleteCamp}
-                className="ml-6 w-16 bg-red-600 text-white px-3 py-1.5 rounded-md hover:bg-red-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
+                className="ml-2 md:ml-6 w-16 bg-red-600 text-white px-3 py-1.5 rounded-md hover:bg-red-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
               >
                 Delete
               </button>
