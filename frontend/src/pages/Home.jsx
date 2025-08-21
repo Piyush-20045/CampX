@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 const Home = () => {
   return (
     <div className="">
-      <div className="px-2 h-screen bg-[url(bgImg.jpg)] bg-gray-950 bg-cover bg-center">
+      <div className="px-2 h-screen bg-gradient-to-r from-[#a0a6b0] via-[#6b7280] to-[#374151] bg-cover bg-center">
         {/* NAVBAR */}
         <Navbar />
 
