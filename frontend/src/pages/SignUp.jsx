@@ -1,40 +1,103 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+      const data = await res.json();
+      console.log(data.token);
+
+      if (data.message) {
+        localStorage.setItem("token", data.token);
+        toast.success("Sign up successfull!", { position: "top-center" });
+        navigate("/");
+      } else {
+        toast.error(data.error || "Error in signUp", {
+          position: "top-center",
+        });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { position: "top-center" });
+      F;
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-300 via-green-500 to-green-700">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
-        <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
-          Sign Up
-        </h2>
+      {/* Blur overlay */}
+      <div
+        className="absolute inset-0 bg-center bg-cover"
+        style={{ backgroundImage: "url(/bgImg2.jpg)" }}
+      ></div>
+      <div className="absolute inset-0 backdrop-blur-sm "></div>
 
-        <form className="space-y-4">
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+        <div className="flex flex-col items-center">
+          <img src="/leaf.svg" className="w-16" />
+          <h2 className="text-3xl font-bold text-center text-gray-800">
+            Register now
+          </h2>
+          <p className="mb-7 text-center text-gray-600">
+            Sign Up to CampX and explore the nearest camps
+          </p>
+        </div>
+
+        <form onSubmit={handleSignUp} className="space-y-4">
           <input
             type="text"
             placeholder="Full Name"
+            required
+            value={userData.name}
+            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
             className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
           />
 
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
+            className="w-full p-3 border  rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
           />
 
           <input
             type="password"
             placeholder="Password"
+            required
+            value={userData.password}
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
             className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
           />
-          <input
+          {/* <input
             type="password"
             placeholder="Confirm Password"
             className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-
+          /> */}
           <button
             type="submit"
-            className="w-full bg-green-600 text-white text-xl py-3 rounded-xl font-medium hover:bg-green-700 active:scale-95 transition cursor-pointer"
+            className="w-full h-12 font-semibold bg-green-600 text-white text-lg py-3 mt-5 rounded-md hover:bg-green-700 active:scale-95 transition cursor-pointer bg-gradient-to-b from-green-800 via-green-700 to-green-600"
           >
             Create Account
           </button>

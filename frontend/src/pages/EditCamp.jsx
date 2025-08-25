@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { fetchCamps } from "../features/camps/campsSlice";
+import { fetchCamps, updateCamp } from "../features/camps/campsSlice";
 
 const EditCamp = () => {
   const { id } = useParams();
@@ -21,11 +21,7 @@ const EditCamp = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      dispatch(updateCamp({ id, formData }));
       dispatch(fetchCamps());
       toast.success("Campground updated", { position: "top-center" });
       navigate(`/camp/${id}`);

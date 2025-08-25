@@ -24,7 +24,7 @@ const Create = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(createCamp(formData));
+    dispatch(createCamp(formData));
     setFormData({
       name: "",
       location: "",

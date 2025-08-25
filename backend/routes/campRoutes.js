@@ -1,6 +1,6 @@
 const express = require("express");
 const Campground = require("../models/campModel")
-
+const protect = require("../middleware/protect")
 const route = express.Router();
 
 route.get("/", async (req, res) => {
@@ -12,7 +12,7 @@ route.get("/", async (req, res) => {
     }
 })
 
-route.post("/", async (req, res) => {
+route.post("/", protect, async (req, res) => {
     try {
         const newCamps = await Campground.create(req.body);
         const savedCamps = await newCamps.save();
@@ -22,7 +22,7 @@ route.post("/", async (req, res) => {
     }
 })
 
-route.delete("/:id", async (req, res) => {
+route.delete("/:id", protect, async (req, res) => {
     try {
         await Campground.findByIdAndDelete(req.params.id);
         res.status(200).json({ message: "Camp deleted" });
@@ -31,7 +31,7 @@ route.delete("/:id", async (req, res) => {
     }
 })
 
-route.put("/:id", async (req, res) => {
+route.put("/:id", protect, async (req, res) => {
     try {
         const camp = await Campground.findById(req.params.id)
         await camp.updateOne(req.body);

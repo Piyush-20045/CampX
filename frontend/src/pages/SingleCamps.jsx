@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { fetchCamps } from "../features/camps/campsSlice";
+import { deleteCamp, fetchCamps } from "../features/camps/campsSlice";
 import { toast } from "react-toastify";
 
 const SingleCamps = () => {
@@ -24,20 +24,14 @@ const SingleCamps = () => {
   if (!camp)
     return <p className="mt-24 text-center text-gray-500">Camp not found</p>;
 
-  // Delete logic
-  let deleteCamp = async () => {
-    const confirm = window.confirm("Do you want to delete this camp post?");
-    if (!confirm) return;
-
+  const campDelete = async () => {
     try {
-      await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps/${id}`, {
-        method: "DELETE",
-      });
+      dispatch(deleteCamp(id));
+      toast.success("Campground Deleted", { position: "top-center" });
+      navigate("/campgrounds");
     } catch (err) {
-      console.error("Error in deleting:", err);
+      toast.error("Failed to delete camp");
     }
-    toast.success("Campground Deleted", { position: "top-center" });
-    navigate("/campgrounds");
   };
 
   return (
@@ -75,7 +69,7 @@ const SingleCamps = () => {
                 Edit
               </Link>
               <button
-                onClick={deleteCamp}
+                onClick={campDelete}
                 className="ml-2 md:ml-6 w-16 bg-red-600 text-white px-3 py-1.5 rounded-md hover:bg-red-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
               >
                 Delete
