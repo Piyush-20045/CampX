@@ -35,7 +35,7 @@ const Campgrounds = () => {
               className="bg-gray-200 shadow-md rounded-lg overflow-hidden"
             >
               <img
-                src={camp.image}
+                src={camp.image || "Camp Image"}
                 alt={camp.name}
                 className="h-48 w-full object-cover"
               />
