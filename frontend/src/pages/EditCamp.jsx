@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchCamps, updateCamp } from "../features/camps/campsSlice";
+import UploadImage from "../components/Upload";
+import { Edit } from "lucide-react";
 
 const EditCamp = () => {
   const { id } = useParams();
@@ -21,8 +23,8 @@ const EditCamp = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      dispatch(updateCamp({ id, formData }));
-      dispatch(fetchCamps());
+      await dispatch(updateCamp({ id, formData })).unwrap();
+      await dispatch(fetchCamps()).unwrap();
       toast.success("Campground updated", { position: "top-center" });
       navigate(`/camp/${id}`);
     } catch (err) {
@@ -30,8 +32,8 @@ const EditCamp = () => {
     }
   };
 
+  // Fetching camp
   const camp = camps?.find((j) => j._id === id);
-  // setting the values in the inputs
   useEffect(() => {
     if (camp) {
       setFormData({
@@ -52,8 +54,9 @@ const EditCamp = () => {
       >
         ⬅ Back to the Camp
       </Link>
-      <div className="p-6 my-7 max-w-xl sm:mx-auto bg-gray-100 rounded-lg shadow-md shadow-green-300">
-        <h2 className="text-2xl text-center text-gray-800 font-bold font-sans">
+      <div className="p-4 my-7 max-w-xl sm:mx-auto md:min-w-xl bg-gray-100 rounded-lg shadow-md shadow-green-300">
+        <h2 className="py-2 flex justify-center items-center gap-1 text-2xl text-gray-800 font-bold font-sans">
+          <Edit size={32} />
           Edit Camp
         </h2>
 
@@ -64,7 +67,7 @@ const EditCamp = () => {
             placeholder="Campground Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none"
             required
           />
           <input
@@ -75,7 +78,7 @@ const EditCamp = () => {
             onChange={(e) =>
               setFormData({ ...formData, location: e.target.value })
             }
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none"
             required
           />
           <div className="flex items-center border rounded w-full overflow-hidden">
@@ -94,16 +97,10 @@ const EditCamp = () => {
               required
             />
           </div>
-          <input
-            type="text"
-            name="image"
-            placeholder="Image URL"
+          {/* UPLOAD Image */}
+          <UploadImage
             value={formData.image}
-            onChange={(e) =>
-              setFormData({ ...formData, image: e.target.value })
-            }
-            className="w-full p-2 border rounded"
-            required
+            onUpload={(url) => setFormData({ ...formData, image: url })}
           />
           <textarea
             name="description"
@@ -112,7 +109,7 @@ const EditCamp = () => {
             onChange={(e) =>
               setFormData({ ...formData, description: e.target.value })
             }
-            className="w-full p-2 border rounded resize-none"
+            className="w-full p-2 border rounded resize-none focus:outline-none"
             rows="4"
             required
           ></textarea>

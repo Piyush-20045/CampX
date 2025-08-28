@@ -42,7 +42,7 @@ const Campgrounds = () => {
               <div className="p-4">
                 <h2 className="text-xl font-semibold">{camp.name}</h2>
                 <p className="text-gray-600">{camp.location}</p>
-                <p className="text-green-600 font-medium mt-2">{camp.price}</p>
+                <p className="text-green-600 font-medium mt-2">₹{camp.price}/night</p>
               </div>
             </Link>
           ))}

@@ -8,22 +8,22 @@ const SingleCamps = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { data: camps, status, error } = useSelector((state) => state.camps);
+  const { data: camps, status } = useSelector((state) => state.camps);
+  const camp = camps.find((j) => j._id === id);
 
   useEffect(() => {
     if (camps.length === 0) {
       dispatch(fetchCamps());
     }
   }, [dispatch]);
+
+  // Show loading or Not found
   if (status === "loading")
     return <p className="mt-24 text-center text-gray-500">Loading...</p>;
-  if (status === "failed")
-    return <p className="text-center text-red-500">{error}</p>;
-
-  const camp = camps.find((j) => j._id === id);
   if (!camp)
     return <p className="mt-24 text-center text-gray-500">Camp not found</p>;
 
+  // Delete fn
   const campDelete = async () => {
     try {
       dispatch(deleteCamp(id));
@@ -35,7 +35,7 @@ const SingleCamps = () => {
   };
 
   return (
-    <div className="px-2 py-6 min-h-screen bg-gray-950">
+    <div className="px-2.5 py-6 min-h-screen bg-gray-950">
       {/* Back button */}
       <Link
         to="/campgrounds"
