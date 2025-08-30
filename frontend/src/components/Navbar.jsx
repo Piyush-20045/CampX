@@ -68,7 +68,7 @@ const Navbar = () => {
       {/* MOBILE MENU links */}
       <nav
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`md:hidden w-full p-6 absolute top-18 left-0 shadow-2xl flex flex-col rounded space-y-6 backdrop-blur-2xl text-center text-lg font-medium opacity-0 transition-all duration-200 ease-out scale-95
+        className={`md:hidden w-full p-6 absolute top-18 left-0 shadow-2xl flex flex-col rounded space-y-6 backdrop-blur-2xl bg-black/20 text-center text-lg font-medium opacity-0 transition-all duration-200 ease-out scale-95
         ${isMenuOpen ? "opacity-100 scale-100" : "pointer-events-none"}`}
       >
         {Navlinks.map((link) => (
