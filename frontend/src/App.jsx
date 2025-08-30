@@ -8,12 +8,14 @@ import { ToastContainer } from "react-toastify";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
+        <Route path="*" element={<PageNotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="/campgrounds" element={<Campgrounds />} />
         <Route path="/create" element={<Create />} />
