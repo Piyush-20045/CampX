@@ -41,8 +41,6 @@ const Create = () => {
 
   return (
     <div className="min-h-screen flex flex-col px-2 bg-gray-900">
-      <Navbar />
-
       <div className="mx-1 my-12 py-8 px-5 max-w-xl md:min-w-xl sm:mx-auto bg-gray-100 rounded-lg shadow">
         <h2 className="flex justify-center items-center text-2xl text-gray-700 font-bold mb-4 text-center">
           <FlameKindling size={44} color="brown" /> Add New Campground

@@ -5,11 +5,8 @@ const Home = () => {
   return (
     <div className="">
       <div className="px-2 h-screen bg-gradient-to-r from-[#a0a6b0] via-[#6b7280] to-[#374151] bg-cover bg-center">
-        {/* NAVBAR */}
-        <Navbar />
-
         {/* HERO Section */}
-        <div className="mt-8 max-h-fit flex flex-col justify-center items-center text-white text-center md:text-start">
+        <div className="pt-7 max-h-fit flex flex-col justify-center items-center text-white text-center md:text-start">
           <img src="camp.svg" className="h-44 w-44 text-white " />
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
             Find Your Perfect Escape.
