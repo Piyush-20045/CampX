@@ -2,12 +2,13 @@ import { Leaf, CircleUser, Menu, CircleX } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features/users/userSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useSelector((state) => state.user);
-  const token = localStorage.getItem("token");
+  const { user, token } = useSelector((state) => state.user);
 
   const Navlinks = [
     { href: "/", label: "Home" },
@@ -17,7 +18,7 @@ const Navbar = () => {
 
   // log out logic
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    dispatch(logout());
     toast.success("You are now logged out!", { position: "top-center" });
   };
   return (

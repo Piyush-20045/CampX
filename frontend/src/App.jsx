@@ -9,8 +9,17 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import PageNotFound from "./pages/PageNotFound";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadUserFromStorage } from "./features/users/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUserFromStorage());
+  }, [dispatch]);
+
   return (
     <div>
       <Navbar />
