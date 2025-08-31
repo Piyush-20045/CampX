@@ -21,7 +21,8 @@ router.post("/signup", async (req, res) => {
         // create token
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" })
 
-        res.status(201).json({ token, message: "Account created successfully" });
+        const user = await User.findOne({ email });
+        res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email }, message: "Account created successfully" });
     } catch (err) {
         res.status(500).json({ error: err.message })
     }

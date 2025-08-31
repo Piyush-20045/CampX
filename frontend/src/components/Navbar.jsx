@@ -1,10 +1,12 @@
 import { Leaf, CircleUser, Menu, CircleX } from "lucide-react";
 import { useState } from "react";
-import { Link, Links } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
 
   const Navlinks = [
@@ -46,6 +48,7 @@ const Navbar = () => {
           onClick={handleLogout}
           className="hidden md:flex gap-1 w-40 text-lg font-medium hover:text-green-400 cursor-pointer active:scale-95 transition ease-in-out duration-200"
         >
+          {user?.name}
           <CircleUser />
           Log Out
         </Link>

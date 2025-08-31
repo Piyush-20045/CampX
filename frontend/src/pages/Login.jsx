@@ -1,33 +1,31 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../features/users/userSlice";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
 
+  // handling login
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+    try {
+      const data = await dispatch(loginUser(userData)).unwrap();
+      if (data.message) {
+        toast.success(data.message || "Login successfull", {
+          position: "top-center",
+        });
+        navigate("/");
+      } else {
+        toast.error(data.error || "Error in login", { position: "top-center" });
       }
-    );
-    const data = await res.json();
-
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      toast.success(data.message || "Login successfull", {
-        position: "top-center",
-      });
-      navigate("/");
-    } else {
+    } catch (err) {
       toast.error(data.error || "Login failed", { position: "top-center" });
     }
   };

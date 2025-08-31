@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import campsReducer from "../features/camps/campsSlice"
+import campsSlice from "../features/camps/campsSlice"
+import userSlice from "../features/users/userSlice";
 
 export const store = configureStore({
     reducer: {
-        camps: campsReducer,
+        camps: campsSlice,
+        user: userSlice,
     },
 })

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 import UploadImage from "../components/Upload";
 import { useDispatch } from "react-redux";
 import { createCamp } from "../features/camps/campsSlice";
@@ -37,7 +36,6 @@ const Create = () => {
     });
     toast.success("Campground created", { position: "top-center" });
   };
-  console.log(formData.image);
 
   return (
     <div className="min-h-screen flex flex-col px-2 bg-gray-900">

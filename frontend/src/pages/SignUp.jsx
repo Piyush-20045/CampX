@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { signUp } from "../features/users/userSlice";
 
 export default function SignUp() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
@@ -12,21 +15,9 @@ export default function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
-        }
-      );
-      const data = await res.json();
-      console.log(data.token);
-
+      const data = await dispatch(signUp(userData)).unwrap();
       if (data.message) {
-        localStorage.setItem("token", data.token);
         toast.success("Sign up successfull!", { position: "top-center" });
         navigate("/");
       } else {
@@ -36,7 +27,6 @@ export default function SignUp() {
       }
     } catch (err) {
       toast.error("Something went wrong", { position: "top-center" });
-      F;
     }
   };
   return (
