@@ -19,7 +19,6 @@ export default function SignUp() {
       const data = await dispatch(signUp(userData)).unwrap();
       if (data.message) {
         toast.success("Sign up successfull!", { position: "top-center" });
-        navigate("/");
       } else {
         toast.error(data.error || "Error in signUp", {
           position: "top-center",

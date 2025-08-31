@@ -21,7 +21,6 @@ export default function Login() {
         toast.success(data.message || "Login successfull", {
           position: "top-center",
         });
-        navigate("/");
       } else {
         toast.error(data.error || "Error in login", { position: "top-center" });
       }
