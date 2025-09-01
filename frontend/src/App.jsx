@@ -36,7 +36,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="2xl:px-64">
       <Routes>
         {/* Routes WITH Navbar */}
         <Route element={<MainLayout />}>

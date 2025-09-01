@@ -1,6 +1,13 @@
-import { Leaf, CircleUser, Menu, CircleX } from "lucide-react";
+import {
+  Leaf,
+  CircleUser,
+  Menu,
+  CircleX,
+  LogOut,
+  UserCheck2Icon,
+} from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/users/userSlice";
@@ -8,6 +15,7 @@ import { logout } from "../features/users/userSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const { user, token } = useSelector((state) => state.user);
 
   const Navlinks = [
@@ -22,37 +30,79 @@ const Navbar = () => {
     toast.success("You are now logged out!", { position: "top-center" });
   };
   return (
-    <div className="px-2 lg:px-12 2xl:px-52 p-4 border-b flex justify-between items-center text-white shadow shadow-blue-200 bg-gradient-to-r from-[#919bac] via-[#6b7280] to-[#8e929b]">
-      {/* LOGO */}
+    <div className="px-2 lg:px-12 p-4 border-b flex justify-between items-center text-white shadow shadow-blue-200 bg-gradient-to-r from-[#919bac] via-[#6b7280] to-[#8e929b]">
+      {/* LEAF LOGO */}
       <Link
         to="/"
         className="flex items-center text-3xl text-white font-extrabold font-logo"
       >
         {<Leaf color="green" size={28} />}CampX
       </Link>
+
       {/* Desktop Navbar Links*/}
-      <nav className="hidden w-full md:flex justify-center gap-10 text-lg font-medium ">
+      <nav className="ml-14 hidden w-full md:flex justify-center gap-10 text-lg font-medium ">
         {Navlinks.map((link) => (
-          <Link
+          <NavLink
             key={link.href}
             to={link.href}
-            className="hover:text-green-400 cursor-pointer active:scale-95 transition ease-in-out duration-200"
+            className={({ isActive }) =>
+              `hover:text-green-400 cursor-pointer active:scale-95 transition ease-in-out duration-200 ${
+                isActive ? "text-green-400" : ""
+              }`
+            }
           >
             {link.label}
-          </Link>
+          </NavLink>
         ))}
       </nav>
-      {/* SignUp & Logout*/}
+
+      {/* LOGIN btn, USERNAME, LOGOUT dropdown menu*/}
       {token ? (
-        <Link
-          to="/login"
-          onClick={handleLogout}
-          className="hidden md:flex gap-1 w-40 text-lg font-medium hover:text-green-400 cursor-pointer active:scale-95 transition ease-in-out duration-200"
+        <span
+          onClick={() => setShowLogout(!showLogout)}
+          className="p-2 w-64 lg:w-56 hidden md:flex items-center gap-1 border border-white rounded-xl hover:bg-gray-500 cursor-pointer"
         >
-          {user?.name}
-          <CircleUser />
-          Log Out
-        </Link>
+          <UserCheck2Icon/>
+          <p className="text-lg font-medium">{user.name}</p>
+          {/* SVG-ICON */}
+          <svg
+            className={`w-4 h-4 transition-transform duration-200 ${
+              showLogout ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+          {/* POP UP WHEN CLICKED ON USERNAME */}
+          <div
+            className={`w-40 top-16 p-2 absolute bg-gray-500 rounded-xl border z-20 shadow shadow-white opacity-0 transition-all duration-200 ease-out scale-95 ${
+              showLogout ? "opacity-100 scale-100" : "pointer-events-none"
+            }`}
+          >
+            <Link
+              to="/login"
+              onClick={handleLogout}
+              className="px-3 py-2 w-full hidden md:flex rounded-xl gap-1 text-lg font-medium cursor-point hover:bg-gray-600"
+            >
+              <LogOut />
+              Log Out
+            </Link>
+            <Link
+              to="/profile"
+              className="px-3 py-2 hidden md:flex rounded-xl gap-1 text-lg font-medium cursor-point hover:bg-gray-600"
+            >
+              <CircleUser />
+              Profile
+            </Link>
+          </div>
+        </span>
       ) : (
         <Link
           to="/login"
@@ -62,6 +112,7 @@ const Navbar = () => {
           Sign in/up
         </Link>
       )}
+
       {/* MOBILE MENU Btn */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -69,6 +120,7 @@ const Navbar = () => {
       >
         {isMenuOpen ? <CircleX size={28} /> : <Menu size={28} />}
       </button>
+
       {/* MOBILE MENU links */}
       <nav
         onClick={() => setIsMenuOpen(!isMenuOpen)}
