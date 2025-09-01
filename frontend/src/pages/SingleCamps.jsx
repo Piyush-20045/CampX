@@ -47,8 +47,8 @@ const SingleCamps = () => {
       {/* Camp Card */}
       <div className="bg-white max-w-2xl mx-auto shadow-md shadow-green-300 rounded-2xl overflow-hidden">
         <img
-          src={camp.image || "Camp photo"}
-          alt={camp.name}
+          src={camp.image || "./placeholder.png"}
+          alt={camp.name || "Camp Image"}
           className="w-full h-72 object-cover"
         />
 
