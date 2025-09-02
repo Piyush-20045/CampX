@@ -39,7 +39,7 @@ export default function Login() {
       <div className="absolute inset-0 backdrop-blur-sm bg-black/30"></div>
 
       {/* Main container */}
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 md:p-8 mx-2">
         <div className="flex flex-col items-center">
           <img
             src="/leaf.svg"

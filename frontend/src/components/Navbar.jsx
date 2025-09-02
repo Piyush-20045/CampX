@@ -60,9 +60,9 @@ const Navbar = () => {
       {token ? (
         <span
           onClick={() => setShowLogout(!showLogout)}
-          className="p-2 w-64 lg:w-56 hidden md:flex items-center gap-1 border border-white rounded-xl hover:bg-gray-500 cursor-pointer"
+          className="p-2 md:w-70 lg:w-62 hidden md:flex items-center gap-1 border border-white rounded-xl hover:bg-gray-500 cursor-pointer"
         >
-          <UserCheck2Icon/>
+          <UserCheck2Icon />
           <p className="text-lg font-medium">{user.name}</p>
           {/* SVG-ICON */}
           <svg
@@ -87,19 +87,19 @@ const Navbar = () => {
             }`}
           >
             <Link
-              to="/login"
-              onClick={handleLogout}
-              className="px-3 py-2 w-full hidden md:flex rounded-xl gap-1 text-lg font-medium cursor-point hover:bg-gray-600"
-            >
-              <LogOut />
-              Log Out
-            </Link>
-            <Link
               to="/profile"
               className="px-3 py-2 hidden md:flex rounded-xl gap-1 text-lg font-medium cursor-point hover:bg-gray-600"
             >
               <CircleUser />
               Profile
+            </Link>
+            <Link
+              to="/login"
+              onClick={handleLogout}
+              className="mt-1 px-3 py-2 hidden md:flex rounded-xl gap-1 text-lg font-medium cursor-point border border-white bg-red-600 hover:bg-red-700 shadow-md shadow-black active:shadow-none"
+            >
+              <LogOut />
+              Log Out
             </Link>
           </div>
         </span>
@@ -116,7 +116,7 @@ const Navbar = () => {
       {/* MOBILE MENU Btn */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="md:hidden pt-1 rounded-full active:bg-gray-700"
+        className="md:hidden pt-1 rounded-full"
       >
         {isMenuOpen ? <CircleX size={28} /> : <Menu size={28} />}
       </button>
@@ -138,12 +138,11 @@ const Navbar = () => {
         ))}
         {token ? (
           <Link
-            to="/login"
-            onClick={handleLogout}
+            to="/profile"
             className="flex gap-1 text-lg mx-auto font-medium hover:text-green-400"
           >
             <CircleUser />
-            Log Out
+            Profile
           </Link>
         ) : (
           <Link

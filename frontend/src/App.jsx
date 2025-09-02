@@ -7,6 +7,7 @@ import EditCamp from "./pages/EditCamp";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
 import PageNotFound from "./pages/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -49,6 +50,14 @@ function App() {
             element={
               <PrivateRoute>
                 <EditCamp />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             }
           />

@@ -29,7 +29,7 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+    <div className="mx-2 min-h-screen flex items-center justify-center bg-gradient-to-r">
       {/* Blur overlay */}
       <div
         className="absolute inset-0 bg-center bg-cover"
@@ -37,7 +37,7 @@ export default function SignUp() {
       ></div>
       <div className="absolute inset-0 backdrop-blur-sm "></div>
 
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 md:p-8">
         <div className="flex flex-col items-center">
           <img src="/leaf.svg" className="w-16" />
           <h2 className="text-3xl font-bold text-center text-gray-800">
