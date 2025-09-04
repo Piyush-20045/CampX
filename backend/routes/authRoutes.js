@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const express = require("express");
+const protect = require("../middleware/protect");
 
 const router = express.Router();
 
@@ -44,6 +45,46 @@ router.post("/login", async (req, res) => {
         res.json({ token, user: { id: user._id, name: user.name, email: user.email }, message: "Login successfull" });
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+})
+
+// update-name route
+router.put("/update-name", protect, async (req, res) => {
+    try {
+        const { newName } = req.body;
+        if (!newName) return res.status(400).json({ error: "Name required!" });
+
+        req.user.name = newName;
+        await req.user.save();
+
+        res.json({ message: "Name updated", user: req.user });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+})
+
+// update-password route
+router.put("/update-password", protect, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+
+        // find user by _id (from protect middleware)
+        const user = await User.findById(req.user._id);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // Compare current password
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) return res.status(400).json({ message: "Wrong current password" });
+
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+
+        await user.save();
+
+        res.json({ message: "Password updated!!" })
+    } catch (err) {
+        res.status(500).json({ error: err.message })
     }
 })
 

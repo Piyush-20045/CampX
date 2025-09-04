@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-const token = localStorage.getItem("token");
 // Fetch all camps
 export const fetchCamps = createAsyncThunk("/camps/fetchCamps", async () => {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps`);
@@ -9,6 +8,7 @@ export const fetchCamps = createAsyncThunk("/camps/fetchCamps", async () => {
 })
 // Create a new camp
 export const createCamp = createAsyncThunk("/camps/createCamp", async (formData) => {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps`, {
         method: "POST",
         headers: {
@@ -21,6 +21,7 @@ export const createCamp = createAsyncThunk("/camps/createCamp", async (formData)
 })
 // Update a camp
 export const updateCamp = createAsyncThunk("/camps/updateCamp", async ({ id, formData }) => {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps/${id}`, {
         method: "PUT",
         headers: {
@@ -36,6 +37,7 @@ export const updateCamp = createAsyncThunk("/camps/updateCamp", async ({ id, for
 export const deleteCamp = createAsyncThunk("camps/deleteCamp", async (id) => {
     const confirm = window.confirm("Do you want to delete this camp post?");
     if (!confirm) return;
+    const token = localStorage.getItem("token");
     await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
