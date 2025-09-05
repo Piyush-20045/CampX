@@ -27,7 +27,7 @@ const Campgrounds = () => {
   if (status === "failed") return <p>Error: {error}</p>;
 
   return (
-    <div className="min-h-screen flex flex-col px-2 bg-gray-900">
+    <div className="min-h-screen flex flex-col px-2 pb-8 bg-gray-900">
       <h1 className="mt-7 text-3xl font-bold mb-6 text-center text-gray-50">
         Explore Campgrounds
       </h1>

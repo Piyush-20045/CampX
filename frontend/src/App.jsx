@@ -15,12 +15,14 @@ import { useEffect } from "react";
 import { loadUserFromStorage } from "./features/users/userSlice";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import FooterComponent from "./components/Footer";
 
 // Layout with Navbar
 const MainLayout = () => (
   <>
     <Navbar />
     <Outlet />
+    <FooterComponent />
   </>
 );
 const EmptyLayout = () => (
