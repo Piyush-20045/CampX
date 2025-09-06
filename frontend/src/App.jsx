@@ -13,8 +13,8 @@ import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { loadUserFromStorage } from "./features/users/userSlice";
-import PublicRoute from "./components/PublicRoute";
-import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./utils/PublicRoute";
+import PrivateRoute from "./utils/PrivateRoute";
 import FooterComponent from "./components/Footer";
 
 // Layout with Navbar

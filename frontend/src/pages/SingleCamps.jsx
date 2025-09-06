@@ -35,7 +35,7 @@ const SingleCamps = () => {
   };
 
   return (
-    <div className="px-2.5 py-6 min-h-screen bg-gray-950">
+    <div className="pt-18 px-2.5 py-6 min-h-screen bg-gray-950">
       {/* Back button */}
       <Link
         to="/campgrounds"
@@ -47,7 +47,7 @@ const SingleCamps = () => {
       {/* Camp Card */}
       <div className="bg-white max-w-2xl mx-auto shadow-md shadow-green-300 rounded-2xl overflow-hidden">
         <img
-          src={camp.image || "./placeholder.png"}
+          src={camp.image || "placeholder.png"}
           alt={camp.name || "Camp Image"}
           className="w-full h-72 object-cover"
         />

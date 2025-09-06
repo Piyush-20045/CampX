@@ -61,7 +61,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-r from-[#a0a6b0] via-[#6b7280] to-[#374151] text-gray-100 pt-32 px-4 py-10">
       <div className="max-w-xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">Your Profile</h1>
 

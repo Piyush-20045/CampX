@@ -27,7 +27,7 @@ const Campgrounds = () => {
   if (status === "failed") return <p>Error: {error}</p>;
 
   return (
-    <div className="min-h-screen flex flex-col px-2 pb-8 bg-gray-900">
+    <div className="min-h-screen flex flex-col pt-18 px-2 pb-8 bg-gradient-to-r from-[#a0a6b0] via-[#6b7280] to-[#374151]">
       <h1 className="mt-7 text-3xl font-bold mb-6 text-center text-gray-50">
         Explore Campgrounds
       </h1>
@@ -40,10 +40,10 @@ const Campgrounds = () => {
           <Link
             to={`/camp/${camp._id}`}
             key={camp._id}
-            className="bg-gray-200 shadow-md rounded-lg overflow-hidden"
+            className="bg-gray-200 rounded-lg overflow-hidden shadow-gray-600 hover:shadow-lg"
           >
             <img
-              src={camp.image || "./placeholder.png"}
+              src={camp.image || "placeholder.png"}
               alt={camp.name || "Camp Image"}
               className="h-48 w-full object-cover"
             />

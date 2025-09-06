@@ -47,7 +47,7 @@ const EditCamp = () => {
   }, [camp]);
 
   return (
-    <div className="px-2 min-h-screen flex flex-col bg-gray-950">
+    <div className="pt-18 px-2 min-h-screen flex flex-col bg-gray-950">
       <Link
         to={`/camp/${id}`}
         className="w-fit mt-9 md:ml-48 text-blue-600 hover:underline"

@@ -40,9 +40,9 @@ const Create = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col px-2 bg-gray-900">
+    <div className="min-h-screen flex flex-col pt-18 px-2 bg-gradient-to-r from-[#a0a6b0] via-[#6b7280] to-[#374151]">
       <div className="mx-1 my-12 py-8 px-5 max-w-xl md:min-w-xl sm:mx-auto bg-gray-100 rounded-lg shadow">
-        <h2 className="flex justify-center items-center text-2xl text-gray-700 font-bold mb-4 text-center">
+        <h2 className="flex justify-center items-center text-2xl md:text-3xl text-gray-700 font-bold mb-4 text-center">
           <FlameKindling size={44} color="brown" /> Add New Campground
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">

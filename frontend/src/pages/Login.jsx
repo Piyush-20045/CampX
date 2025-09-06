@@ -30,7 +30,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat">
+    <div className="min-h-screen flex items-center justify-center bg-[url('/bg.avif')] bg-cover bg-center">
       {/* Blur overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"

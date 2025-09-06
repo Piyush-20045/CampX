@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { signUp } from "../features/users/userSlice";
 
 export default function SignUp() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -29,15 +28,16 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="mx-2 min-h-screen flex items-center justify-center bg-gradient-to-r">
+    <div className="min-h-screen flex items-center justify-center bg-[url('/bg.avif')] bg-cover bg-center">
       {/* Blur overlay */}
       <div
         className="absolute inset-0 bg-center bg-cover"
         style={{ backgroundImage: "url(/bgImg2.jpg)" }}
       ></div>
-      <div className="absolute inset-0 backdrop-blur-sm "></div>
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/30"></div>
 
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 md:p-8">
+      {/* Main container */}
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6 md:p-8 m-2">
         <div className="flex flex-col items-center">
           <img src="/leaf.svg" className="w-16" />
           <h2 className="text-3xl font-bold text-center text-gray-800">
