@@ -16,6 +16,7 @@ import { loadUserFromStorage } from "./features/users/userSlice";
 import PublicRoute from "./utils/PublicRoute";
 import PrivateRoute from "./utils/PrivateRoute";
 import FooterComponent from "./components/Footer";
+import ScrollToTop from "./utils/ScrollToTop";
 
 // Layout with Navbar
 const MainLayout = () => (
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div className="2xl:px-64">
+      <ScrollToTop />
       <Routes>
         {/* Routes WITH Navbar */}
         <Route element={<MainLayout />}>
