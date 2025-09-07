@@ -9,6 +9,7 @@ const SingleCamps = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data: camps, status } = useSelector((state) => state.camps);
+  const { user } = useSelector((state) => state.user);
   const camp = camps.find((j) => j._id === id);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const SingleCamps = () => {
   };
 
   return (
-    <div className="pt-18 px-2.5 py-6 min-h-screen bg-gray-950">
+    <div className="py-18 px-2.5 min-h-screen bg-gray-950">
       {/* Back button */}
       <Link
         to="/campgrounds"
@@ -47,7 +48,7 @@ const SingleCamps = () => {
       {/* Camp Card */}
       <div className="bg-white max-w-2xl mx-auto shadow-md shadow-green-300 rounded-2xl overflow-hidden">
         <img
-          src={camp.image || "placeholder.png"}
+          src={camp.image || "/placeholder.png"}
           alt={camp.name || "Camp Image"}
           className="w-full h-72 object-cover"
         />
@@ -61,20 +62,22 @@ const SingleCamps = () => {
             <span className="text-lg font-semibold text-green-600">
               ₹{camp.price}/night
             </span>
-            <div>
-              <Link
-                to={`/edit/${id}`}
-                className="w-16 bg-green-600 text-white px-4 py-2.5 rounded-md hover:bg-green-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={campDelete}
-                className="ml-2 md:ml-6 w-16 bg-red-600 text-white px-3 py-1.5 rounded-md hover:bg-red-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
-              >
-                Delete
-              </button>
-            </div>
+            {user._id !== camp.author?.id ? (
+              <div>
+                <Link
+                  to={`/edit/${id}`}
+                  className="w-16 bg-green-600 text-white px-4 py-2.5 rounded-md hover:bg-green-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={campDelete}
+                  className="ml-2 md:ml-6 w-16 bg-red-600 text-white px-3 py-1.5 rounded-md hover:bg-red-700 cursor-pointer active:scale-95 transition duration-150 shadow-black shadow-sm active:shadow-none"
+                >
+                  Delete
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

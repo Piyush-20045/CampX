@@ -1,20 +1,18 @@
 import { useState } from "react";
 import UploadImage from "../components/Upload";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createCamp } from "../features/camps/campsSlice";
 import { toast } from "react-toastify";
 import { FlameKindling } from "lucide-react";
 
 const Create = () => {
   const dispatch = useDispatch();
-  const {user} = useSelector((state) => state.user)
   const [formData, setFormData] = useState({
     name: "",
     location: "",
     price: "",
     image: "",
     description: "",
-    author: user,
   });
 
   const handleChange = (e) => {

@@ -43,7 +43,7 @@ const Campgrounds = () => {
             className="bg-gray-200 rounded-lg overflow-hidden shadow-gray-600 hover:shadow-lg"
           >
             <img
-              src={camp.image || "placeholder.png"}
+              src={camp.image || "/placeholder.png"}
               alt={camp.name || "Camp Image"}
               className="h-48 w-full object-cover"
             />
