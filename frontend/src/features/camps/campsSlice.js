@@ -35,8 +35,6 @@ export const updateCamp = createAsyncThunk("/camps/updateCamp", async ({ id, for
 })
 // Delete logic
 export const deleteCamp = createAsyncThunk("camps/deleteCamp", async (id) => {
-    const confirm = window.confirm("Do you want to delete this camp post?");
-    if (!confirm) return;
     const token = localStorage.getItem("token");
     await fetch(`${import.meta.env.VITE_BACKEND_URL}/camps/${id}`, {
         method: "DELETE",

@@ -26,6 +26,8 @@ const SingleCamps = () => {
 
   // Delete fn
   const campDelete = async () => {
+    const confirm = window.confirm("Do you want to delete this camp post?");
+    if (!confirm) return;
     try {
       dispatch(deleteCamp(id));
       toast.success("Campground Deleted", { position: "top-center" });
