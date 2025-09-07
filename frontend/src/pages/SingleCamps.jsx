@@ -62,7 +62,7 @@ const SingleCamps = () => {
             <span className="text-lg font-semibold text-green-600">
               ₹{camp.price}/night
             </span>
-            {user._id !== camp.author?.id ? (
+            {user && user?._id && camp.author?.id && (
               <div>
                 <Link
                   to={`/edit/${id}`}
@@ -77,7 +77,7 @@ const SingleCamps = () => {
                   Delete
                 </button>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>

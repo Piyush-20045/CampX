@@ -1,11 +1,12 @@
 import { useState } from "react";
 import UploadImage from "../components/Upload";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createCamp } from "../features/camps/campsSlice";
 import { toast } from "react-toastify";
 import { FlameKindling } from "lucide-react";
 
 const Create = () => {
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
@@ -93,9 +94,10 @@ const Create = () => {
           ></textarea>
           <button
             type="submit"
+            disabled={!user}
             className="w-full text-white py-2 rounded hover:bg-green-700 cursor-pointer active:scale-95 transition duration-150 bg-gradient-to-b from-green-800 via-green-700 to-green-600"
           >
-            Add Campground
+            {!user ? "Login to add a campground" : "Add Campground"}
           </button>
         </form>
       </div>
