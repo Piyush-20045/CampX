@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Campgrounds from "../pages/Campgrounds";
+import Features from "../components/Features";
 
 const Home = () => {
   return (
@@ -31,7 +31,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Campgrounds />
+      {/* FEATURES Section */}
+      <Features />
     </div>
   );
 };
