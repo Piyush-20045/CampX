@@ -9,9 +9,10 @@ app.use(cors());
 app.use(express.json());
 connectDB();
 
-app.use("/camps" , campRoutes);
-app.use("/api/auth" , authRoutes);
+app.use("/camps", campRoutes);
+app.use("/api/auth", authRoutes);
 
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log("Serving on 3000 port");
 })
