@@ -168,8 +168,13 @@ const Profile = () => {
       {/* Change Password Modal */}
       {isPassModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <form className="bg-gray-800 rounded-2xl p-6 w-96 relative">
+          <form
+            onSubmit={handlePasswordUpdate}
+            className="bg-gray-800 rounded-2xl p-6 w-96 relative"
+          >
+            {/* Close / Cancel btn */}
             <button
+              type="button"
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-200"
               onClick={() => setIsPassModalOpen(false)}
             >
@@ -193,7 +198,7 @@ const Profile = () => {
               required
             />
             <button
-              onClick={handlePasswordUpdate}
+              type="submit"
               className="w-full bg-green-600 hover:bg-green-500 py-2 rounded-xl font-medium"
             >
               Update Password
