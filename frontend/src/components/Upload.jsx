@@ -25,7 +25,7 @@ const UploadImage = ({ onUpload, value }) => {
       }
     );
     const uploadedImg = await res.json();
-    onUpload(uploadedImg.url); //sending back this url
+    onUpload(uploadedImg.secure_url); //sending back this url
     setLoading(false);
   };
   // Remove image
