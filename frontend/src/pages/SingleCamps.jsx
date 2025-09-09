@@ -16,7 +16,7 @@ const SingleCamps = () => {
     if (camps.length === 0) {
       dispatch(fetchCamps());
     }
-  }, [dispatch]);
+  }, [dispatch, camps.length]);
 
   // Show loading or Not found
   if (status === "loading")
@@ -31,6 +31,7 @@ const SingleCamps = () => {
     try {
       dispatch(deleteCamp(id));
       toast.success("Campground Deleted", { position: "top-center" });
+      dispatch(fetchCamps());
       navigate("/campgrounds");
     } catch (err) {
       toast.error("Failed to delete camp");
