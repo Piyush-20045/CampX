@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCamps } from "../features/camps/campsSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 
@@ -11,15 +11,17 @@ const Campgrounds = () => {
 
   useEffect(() => {
     dispatch(fetchCamps());
-  }, [dispatch, camps.length]);
+  }, [dispatch]);
 
   // Filter camps based on search
-  const filteredCamps = camps.filter((camp) => {
-    const matchesSearch =
-      camp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      camp.location.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSearch;
-  });
+  const filteredCamps = useMemo(() => {
+    const term = searchTerm.toLowerCase();
+    return camps.filter(
+      (camp) =>
+        camp.name.toLowerCase().includes(term) ||
+        camp.location.toLowerCase().includes(term)
+    );
+  }, [camps, searchTerm]);
 
   if (status === "loading" && camps.length === 0) {
     return (

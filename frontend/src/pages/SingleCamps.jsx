@@ -31,8 +31,8 @@ const SingleCamps = () => {
     try {
       dispatch(deleteCamp(id));
       toast.success("Campground Deleted", { position: "top-center" });
-      dispatch(fetchCamps());
       navigate("/campgrounds");
+      dispatch(fetchCamps());
     } catch (err) {
       toast.error("Failed to delete camp");
     }
